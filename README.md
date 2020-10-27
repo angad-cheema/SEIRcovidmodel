@@ -1,5 +1,5 @@
 # SEIRcovidmodel
-Quick extended SEIR model I made in March 2020 to predict COVID 19 spread in Minnesota. Tried fitting constants to the past one week of data that was available. Rest of the constants were a combination of literature review and guessing. Wasn't very accurate.
+Quick extended SEIR model I made in March 2020 to predict COVID 19 spread in Minnesota. Added states like asymptomatic and hospitalized to extend the model. Constants were determined from a combination of fitting to the last week of data, literature review, and guessing. Wasn't very accurate.
 Entire project quickly written in mathematica.
 ## Model
 Model was based on an extended version of the SEIR model. 
