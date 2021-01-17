@@ -1,0 +1,62 @@
+init = {5640000, 3, 1, 2, 0, 0, 0};
+sum = Total[init];
+beta = 0.45;
+sigmaA = 0.1;
+sigmaI = 0.25;
+gammaA = 0.25;
+gammaI = 0.18;
+gammaH = 0.18;
+nu = 0.02;
+mu = 0.01;
+step = 0.1;
+t = 225;
+n = t/step;
+
+f[y_] := {
+   -(beta)*(y[[1]]*(y[[3]] + y[[4]]))/sum,
+   (beta)*(y[[1]]*(y[[3]] + y[[4]]))/(
+     sum - y[[5]] - y[[6]]) - (sigmaA + sigmaI + nu)*y[[2]],
+   sigmaA*y[[2]] - gammaA*y[[3]],
+   sigmaI*y[[2]] - (gammaI)*y[[4]],
+   nu*y[[2]] - (mu + gammaH)*y[[5]],
+   mu*y[[5]],
+   gammaA*y[[3]] + gammaI*y[[4]] + gammaH*y[[5]]
+   };
+
+rk4[init_, h_] := Module[{k1, k2, k3, k4},
+   k1 = f[init];
+   k2 = f[init + (h/2)*k1];
+   k3 = f[init + (h/2)*k2];
+   k4 = f[init + h*k3];
+   init + (h/6)*(k1 + 2*k2 + 2*k3 + k4)
+   ];
+
+sSet = ConstantArray[0, IntegerPart[n] + 1];
+eSet = ConstantArray[0, IntegerPart[n] + 1];
+aSet = ConstantArray[0, IntegerPart[n] + 1];
+iSet = ConstantArray[0, IntegerPart[n] + 1];
+hSet = ConstantArray[0, IntegerPart[n] + 1];
+dSet = ConstantArray[0, IntegerPart[n] + 1];
+rSet = ConstantArray[0, IntegerPart[n] + 1];
+{sSet[[1]], eSet[[1]], aSet[[1]], iSet[[1]], hSet[[1]], dSet[[1]], 
+   rSet[[1]]} = init;
+y0 = init;
+
+Do[
+  y1 = rk4[y0, step];
+  {sSet[[i + 1]], eSet[[i + 1]], aSet[[i + 1]], iSet[[i + 1]], 
+    hSet[[i + 1]], dSet[[i + 1]], rSet[[i + 1]]} = y1;
+  y0 = y1,
+  {i, 1, n}];
+
+tSet = Table[i*step, {i, 0, n}];
+s = Transpose[{tSet, sSet}];
+e = Transpose[{tSet, eSet}];
+a = Transpose[{tSet, aSet}];
+i = Transpose[{tSet, iSet}];
+h = Transpose[{tSet, hSet}];
+d = Transpose[{tSet, dSet}];
+r = Transpose[{tSet, rSet}];
+
+ListPlot[{s, e, a, i, h, d, r}, AxesLabel -> {"Days", "People"}, 
+ PlotLegends -> {"S", "E", "A", "I", "H", "D", "R"}]
