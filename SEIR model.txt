@@ -1,3 +1,5 @@
+(* Mathematica 12 code *)
+(* Angad Cheema *)
 init = {5640000, 3, 1, 2, 0, 0, 0};
 sum = Total[init];
 beta = 0.45;
