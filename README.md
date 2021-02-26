@@ -2,13 +2,13 @@
 Quick extended SEIR model I made in March 2020 to predict COVID 19 spread in Minnesota. Added states like asymptomatic and hospitalized to extend the model. Constants were determined from a combination of fitting to the last week of data, literature review, and guessing. Wasn't very accurate.
 Entire project quickly written in mathematica.
 
-Git does not work well with Mathematica notebooks so there is a .nb file as well as a .txt file with the code. In addition there is an example plot showing some
-of the horribly inaccurate predictions produced.
+Git does not work well with Mathematica notebooks so there is a .nb file as well as a .txt file with the code. In addition, there is an example plot showing some
+of the inaccurate predictions produced.
 ## Model
 Model was based on an extended version of the SEIR model. 
 The states were:
 
-S: Susceptible and uninfected, the default starting state for most people 
+S: Susceptible and uninfected, the default starting state for nearly all people 
 
 E: Exposed to Covid, but still non infectious. Increase is preportional to the product of number of susceptible (S) and infectious people (A + I)
 Eventually move to either infected, asymptomatic, hospitalized.
