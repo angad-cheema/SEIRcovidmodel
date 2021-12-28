@@ -26,3 +26,7 @@ R: Recovered, assumed to have immunity.
 ## Methods
 I used an array (of length 7) to store the quantity of people in each state. I had an function (R^7 -> R^7) on the array that had the dynamical relationships between each state (outlined above) in the form of ordinary differential equations. 
 I used Runge Kutta 4th order method to numerically solve this system for an arbitrary amount of time.
+
+
+## Example Output
+![Example](SEIRexampleoutput.png)
